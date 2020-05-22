@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 def f(x):
     return sin(4 * x)
 
-#TODO: переробити Ньютона
-
 a = 0
 b = 2
 
@@ -40,7 +38,7 @@ N = interpolation.newton_polynomial(X1, Y1)
 N_func = sp.lambdify(sp.symbols('x'), N)
 
 N_c = interpolation.newton_polynomial(XC, YC)
-N_c_func = sp.lambdify(sp.symbols('x'), N)
+N_c_func = sp.lambdify(sp.symbols('x'), N_c)
 
 
 Xs = list(np.arange(a, b, plot_step))
@@ -55,29 +53,33 @@ Y_N_c = list(map(N_c_func, Xs))
 
 plt.style.use('dark_background')
 
-plt.subplot(3, 2, 1)
-plt.plot(Xs, Y_f, color='#00ffff', linewidth="3", dash_capstyle='round')
+plt.subplot(2, 1, 1)
+plt.plot(Xs, Y_f, color='#00ffff', linewidth="1", dash_capstyle='round')
 plt.xlabel("x")
-plt.ylabel("f(x)")
 
-plt.subplot(3, 2, 2)
-plt.plot(Xs, Y_L, color='#aa00ff', linestyle=":", linewidth="3", dash_capstyle='round')
+plt.plot(Xs, Y_L, color='#ff00ff', linestyle=":", linewidth="1", dash_capstyle='round')
 plt.xlabel("x")
-plt.ylabel("L(x)")
 
-plt.subplot(3, 2, 3)
-plt.plot(Xs, Y_L_c, color='#bb00ee', linestyle=":", linewidth="3", dash_capstyle='round')
+plt.plot(Xs, Y_N, color='#ffff00', linestyle=":", linewidth="1", dash_capstyle='round')
 plt.xlabel("x")
-plt.ylabel("L_c(x)")
 
-plt.subplot(3, 2, 4)
-plt.plot(Xs, Y_N, color='#cc00dd', linestyle=":", linewidth="3", dash_capstyle='round')
+plt.plot(X1, Y1, "ro", color='#ff0000')
+plt.xlim(a, b)
+plt.ylim(-3, 3)
+
+plt.subplot(2, 1, 2)
+
+plt.plot(Xs, Y_f, color='#00ffff', linewidth="1", dash_capstyle='round')
 plt.xlabel("x")
-plt.ylabel("N(x)")
 
-plt.subplot(3, 2, 5)
-plt.plot(Xs, Y_N_c, color='#dd00cc', linestyle=":", linewidth="3", dash_capstyle='round')
+plt.plot(Xs, Y_L_c, color='#ff00ff', linestyle=":", linewidth="1", dash_capstyle='round')
 plt.xlabel("x")
-plt.ylabel("N_c(x)")
 
+plt.plot(Xs, Y_N_c, color='#ffff00', linestyle=":", linewidth="1", dash_capstyle='round')
+plt.xlabel("x")
+
+plt.plot(XC, YC, "ro", color='#ff0000')
+
+plt.xlim(a, b)
+plt.ylim(-3, 3)
 plt.show()
