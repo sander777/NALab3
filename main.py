@@ -18,6 +18,7 @@ plot_step = .001
 X1 = list()
 Y1 = list()
 
+
 XC = list()
 YC = list()
 
@@ -34,10 +35,10 @@ L_func = sp.lambdify(sp.symbols('x'), L)
 L_c= interpolation.lagrange_polynomial(XC, YC)
 L_c_func = sp.lambdify(sp.symbols('x'), L_c)
 
-N = interpolation.newton_polynomial(X1, Y1)
+N = interpolation.new_newton_polynomial(X1, Y1)
 N_func = sp.lambdify(sp.symbols('x'), N)
 
-N_c = interpolation.newton_polynomial(XC, YC)
+N_c = interpolation.new_newton_polynomial(XC, YC)
 N_c_func = sp.lambdify(sp.symbols('x'), N_c)
 
 

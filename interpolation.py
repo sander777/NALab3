@@ -26,7 +26,25 @@ def newton_polynomial(X, Y):
     for i in range(len(Y)-1):
         g = [(g[j+1]-g[j])/(X[j+i+1]-X[j]) for j in range(len(g)-1)]
         s += g[0] * product(x-X[j] for j in range(i+1))
-    return s
+    return sympy.expand(s)
+
+def new_newton_polynomial(X, Y):
+    x = sympy.symbols('x')
+    n = len(X)
+    s = f(0, n - 1, X, Y)
+
+    for i in range(n - 1):
+        s *= (x - X[n - 2 - i])
+        s += f(0, n - 2 - i, X, Y)
+    return sympy.expand(s)
+
+def f(i, j, X, Y):
+    if j == i:
+        return Y[j]
+    a = f(i + 1, j, X, Y)
+    b = f(i, j - 1, X, Y)
+    return (a - b) / (X[j] - X[i])
+
 
 
 def product(a):
